@@ -1,0 +1,64 @@
+<form action='/figures/<%= @figure.id %>' method="POST">
+  <h1>Edit Your Figure Below</h1>
+  <label for="figure_name">Name:</label>
+  <br>
+</br>
+<input type="text" name="figure[name]" value="<%= @figure.name %>" id="figure_name">
+<br>
+</br>
+<label>Choose an existing title:</label>
+<% if @figure.titles[0] == nil %>
+  <%@titles.each do |title|%>
+  <input type="checkbox" name="figure[title_ids][]" id="title_<%=title.id%>" value="<%=title.id%>">
+  <%=title.name%></input>
+  <% end %>
+<% else %>
+  <%@titles.each do |title|%>
+    <% @figure.titles.ids.each do |id|%>
+      <% if title.id == id %>
+        <input type="checkbox" checked name="figure[title_ids][]" id="title_<%=title.id%>" value="<%=title.id%>">
+        <%=title.name%></input>
+    <% else %>
+      <input type="checkbox" name="figure[title_ids][]" id="title_<%=title.id%>" value="<%=title.id%>">
+      <%=title.name%></input>
+  <% end %>
+<% end %>
+<%end%>
+<%end%>
+<br>
+</br>
+<label>Choose an existing landmark:</label>
+<% if @figure.landmarks[0] == nil %>
+  <%@landmarks.each do |landmark|%>
+  <input type="checkbox" name="figure[landmark_ids][]" id="landmark_<%=landmark.id%>" value="<%=landmark.id%>">
+  <%=landmark.name%></input>
+  <% end %>
+<% else %>
+  <%@landmarks.each do |landmark|%>
+    <% @figure.landmarks.ids.each do |id|%>
+      <% if landmark.id == id %>
+        <input type="checkbox" checked name="figure[landmark_ids][]" id="landmark_<%=landmark.id%>" value="<%=landmark.id%>">
+        <%=landmark.name%></input>
+    <% else %>
+      <input type="checkbox" name="figure[landmark_ids][]" id="landmark_<%=landmark.id%>" value="<%=landmark.id%>">
+      <%=landmark.name%></input>
+  <% end %>
+<% end %>
+<%end%>
+<%end %>
+<br>
+</br>
+<label>and/or, create a new landmark or title:</label>
+<br>
+</br>
+<label>Landmark Name:</label>
+<input  type="text" name="landmark[name]" id="new_landmark"></input>
+<br>
+</br>
+<label>Title Name:</label>
+<input  type="text" name="title[name]" id="new_title"></input>
+<br>
+</br>
+<input type="submit" name="Submit" id="submit">
+<input id="hidden" type="hidden" name="_method" value="patch">
+</form>
