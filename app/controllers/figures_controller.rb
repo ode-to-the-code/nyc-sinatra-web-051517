@@ -24,8 +24,7 @@ class FiguresController < ApplicationController
   end
 
   patch '/figures/:id' do
-    binding.pry
-    Figure.update(params[:id], name: params[:name])
+    Figure.update(params[:id], name: params[:figure][:name])
     erb :'figures/index'
   end
 
